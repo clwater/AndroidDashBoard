@@ -202,7 +202,7 @@ public class DashBoard extends View {
         canvas.save();
         canvas.translate(canvas.getWidth()/2, 400);
 
-        int[] colors = {Color.parseColor("#f86235"), Color.parseColor("#fbcd51"), Color.parseColor("#00ff00")};
+        int[] colors = {Color.parseColor("#F95A37"), Color.parseColor("#f9cf45"), Color.parseColor("#00ff00")};
 //        float[] positions = {0.5f, 0.75f, (0.7f + 0.5f / 3 * 2)};
         float[] positions = {0.5f - 5f/180f * 0.5f, 0.5f + 0.5f * 5f / 6f, 1.0f};
         SweepGradient sweepGradient = new SweepGradient(0, 0, colors, positions);
@@ -212,11 +212,20 @@ public class DashBoard extends View {
         canvas.drawArc(rect, 175, 5f + 180f / 6f * 5f, true, paint);
 
 
+//        canvas.rotate(-5,0f,0f);
 
+        int[] colors2 = {Color.parseColor("#79D062"),  Color.parseColor("#3FBF55")};
 
-        paint.setColor(Color.parseColor("#74cc65"));
-        paint.setShader(null);
+        float[] positions2 = {0.5f + 0.5f * 5f / 6f, 1.0f + 5f/180f * 0.5f};
+        sweepGradient = new SweepGradient(0, 0, colors2, positions2);
+        paint.setShader(sweepGradient);
         rect = new RectF( -length, -length, length, length);
+//        canvas.drawRect(100, 100, 500, 300, paint);
+//        canvas.drawArc(rect, 175, 5f + 180f / 6f * 5f, true, paint);
+
+//        paint.setColor(Color.parseColor("#74cc65"));
+//        paint.setShader(null);
+//        rect = new RectF( -length, -length, length, length);
         canvas.drawArc(rect, 180f + 180f / 6f * 5f, 180f / 6 + 5, true, paint);
 
         paint.setColor(backGroundColor);
