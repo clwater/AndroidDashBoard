@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         final DashBoard d = findViewById(R.id.dash);
         d.setBackGroundColor(Color.WHITE);
-        d.setPointLength1(0.5f);
         d.setLength(300);
+        d.setPointLength1(0.8f);
 
         d.cgangePer(0);
 
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 int min = 1;
                 Random random = new Random();
                 int p = random.nextInt(max) % (max - min + 1) + min;
+//                Log.d("gzb" , "p / 100f: " + p / 100f);
                 d.cgangePer(p / 100f);
             }
         });

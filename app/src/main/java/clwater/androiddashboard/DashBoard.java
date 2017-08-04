@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.SweepGradient;
 import android.support.annotation.Nullable;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +23,7 @@ public class DashBoard extends View {
     Paint paint;
     int backGroundColor;
     float pointLength1;
-    float per1 ;
+    float per ;
     float length ;
 
 
@@ -30,8 +32,7 @@ public class DashBoard extends View {
         super(context);
         backGroundColor = Color.WHITE;
         pointLength1 = 180;
-        pointLength1 = 120;
-        per1 = 0;
+        per = 0;
         length = 300;
 
     }
@@ -60,7 +61,11 @@ public class DashBoard extends View {
         //刻度文字
         initScale(canvas);
 
+        //指针
         initPointer(canvas);
+        
+        //提示内容
+        initText(canvas);
 
 //        paint.setColor(Color.BLACK);
 //        canvas.drawText("text1", 10, 20, paint);
@@ -68,6 +73,55 @@ public class DashBoard extends View {
 
     }
 
+    private void initText(Canvas canvas) {
+        canvas.restore();
+        canvas.save();
+        canvas.translate(canvas.getWidth()/2, 400);
+
+
+//        paint.setColor(Color.BLACK);
+//        RectF rect = new RectF( -length / 3 , length /3 , -length / 3, length /3);
+//        canvas.drawArc(rect, 0, 360, true, paint);
+//
+//        Paint pp = new Paint();
+//        pp.setTextSize(50);
+//        canvas.drawText("aaa" , 0 ,0 , pp);
+
+        paint.setColor(Color.parseColor("#eeeeee"));
+        paint.setShader(null);
+        RectF rect = new RectF( - (length/ 3 + length/ 60), - (length / 3 + length/ 60) , length / 3 + length/ 60, length / 3 + length/ 60);
+        canvas.drawArc(rect, 0, 360, true, paint);
+
+        paint.setColor(Color.parseColor("#ffffff"));
+        paint.setShader(null);
+        rect = new RectF( - (length/ 3 ), - (length / 3), length / 3, length / 3);
+        canvas.drawArc(rect, 0, 360, true, paint);
+
+        canvas.restore();
+        canvas.save();
+        canvas.translate(canvas.getWidth()/2 + length/3f /6f, 400);
+
+        Paint textPaint = new Paint();
+        textPaint.setStrokeWidth(1);
+
+        textPaint.setTextSize(60);
+        textPaint.setColor(Color.parseColor("#fc6555"));
+        textPaint.setTextAlign(Paint.Align.RIGHT);
+
+        canvas.drawText("" + (int) (per * 100), 0, 0, textPaint);
+
+        textPaint.setTextSize(30);
+        textPaint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("%" , 0, 0, textPaint);
+
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setColor(Color.parseColor("#cecece"));
+        canvas.translate(- length/3f /6f,40);
+        canvas.drawText("完成率" , 0, 0, textPaint);
+
+
+
+    }
 
 
     public void setBackGroundColor(int color){
@@ -75,7 +129,7 @@ public class DashBoard extends View {
     }
 
     public void setPointLength1(float pointLength1){
-        this.pointLength1 = -300 * pointLength1 ;
+        this.pointLength1 = -length * pointLength1 ;
     }
 
     private void initScale(Canvas canvas) {
@@ -121,15 +175,25 @@ public class DashBoard extends View {
         paint.setColor(Color.BLACK);
 
         Paint pointerPaint = new Paint(paint);
-        pointerPaint.setStrokeWidth(3);
+        pointerPaint.setStrokeWidth(1);
 
         canvas.restore();
         canvas.save();
         canvas.translate(canvas.getWidth()/2, 400);
-        float change = per1 * length;
+        float change = per * 180;
         canvas.rotate(-90 + change,0f,0f);
-        canvas.drawLine(0f, pointLength1 - 20f, 0,  0 , pointerPaint);
+//
+//        canvas.drawLine(0f, pointLength1 - 20f, 0,  0 , pointerPaint);
 
+
+        Path path = new Path();
+//        Log.d("gzb" , "" + pointLength1);
+        path.moveTo(0 , pointLength1);
+        path.lineTo(-15 , 0);
+        path.lineTo(15,0);
+        path.lineTo(0 , pointLength1);
+        path.close();
+        canvas.drawPath(path, paint);
 
     }
 
@@ -157,14 +221,14 @@ public class DashBoard extends View {
 
         paint.setColor(backGroundColor);
         paint.setShader(null);
-        rect = new RectF( - (length - 100 ), -200, length - 100, 200);
+        rect = new RectF( - (length - 100 ), -(length / 3f * 2f), length - 100, length / 3f * 2f);
         canvas.drawArc(rect, 165, 210, true, paint);
     }
 
 
 
-    public void cgangePer(float per1 ){
-        this.per1 = per1;
+    public void cgangePer(float per ){
+        this.per = per;
         invalidate();
     }
 }
