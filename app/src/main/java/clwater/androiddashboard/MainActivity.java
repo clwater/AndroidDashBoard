@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         final DashBoard d = findViewById(R.id.dash);
 
-        
+
         findViewById(R.id.rand).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
