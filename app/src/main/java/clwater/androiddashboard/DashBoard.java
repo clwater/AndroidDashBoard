@@ -9,8 +9,6 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.SweepGradient;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.view.animation.OvershootInterpolator;
 /**
  * Created by gengzhibo on 17/8/3.
  */
-
 public class DashBoard extends View {
 
 
@@ -37,12 +34,19 @@ public class DashBoard extends View {
 
 
 
+<<<<<<< HEAD
+=======
 
     public DashBoard(Context context) {
         super(context);
         init();
     }
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
 
+    public DashBoard(Context context) {
+        super(context);
+        init();
+    }
 
 
     public DashBoard(Context context, @Nullable AttributeSet attrs) {
@@ -55,8 +59,23 @@ public class DashBoard extends View {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int heitht = width / 2 / 4 * 5;
         initIndex(width / 2);
+        setMeasuredDimension(width, heitht);
+
+    public DashBoard(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+<<<<<<< HEAD
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int heitht = width / 2 / 4 * 5;
+        initIndex(width / 2);
         //优化组件高度
         setMeasuredDimension(width, heitht);
+=======
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
     }
 
 
@@ -77,6 +96,13 @@ public class DashBoard extends View {
         textPaint = new Paint();
         tmpPaint = new Paint();
         strokePain = new Paint();
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
     }
 
     public DashBoard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -94,9 +120,18 @@ public class DashBoard extends View {
     protected void onDraw(Canvas canvas) {
 
         setLayerType(LAYER_TYPE_SOFTWARE, null);
+<<<<<<< HEAD
 
         //颜色指示的环
         initRing(canvas);
+=======
+
+
+
+        //颜色指示的环
+        initRing(canvas);
+//
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
         //刻度文字
         initScale(canvas);
         //指针
@@ -106,7 +141,10 @@ public class DashBoard extends View {
     }
 
     private void initText(Canvas canvas) {
+<<<<<<< HEAD
         //抗锯齿
+=======
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
         canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
         canvas.restore();
         canvas.save();
@@ -114,10 +152,16 @@ public class DashBoard extends View {
 
         float rIndex = length ;
 
+<<<<<<< HEAD
         //设置文字展示的圆环
         paint.setColor(Color.parseColor("#eeeeee"));
         paint.setShader(null);
         paint.setShadowLayer(5, 0, 0, 0x54000000);
+=======
+        paint.setColor(Color.parseColor("#ffffff"));
+        paint.setShader(null);
+        paint.setShadowLayer(5, 0, 0, 0x14000000);
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
         rect = new RectF( - (rIndex/ 3 ), - (rIndex / 3), rIndex / 3, rIndex / 3);
         canvas.drawArc(rect, 0, 360, true, paint);
 
@@ -290,6 +334,10 @@ public class DashBoard extends View {
         strokePain = new Paint(paint);
 
         strokePain.setColor(0x3f979797);
+<<<<<<< HEAD
+=======
+//        strokePain.setColor(0xff979797);
+>>>>>>> 620a1994bf312b65820e200a089117b899e2baf9
         strokePain.setStrokeWidth(10);
         strokePain.setShader(null);
         strokePain.setStyle(Paint.Style.STROKE);
